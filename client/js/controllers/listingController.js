@@ -10,7 +10,17 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
     $scope.detailedInfo = undefined;
 
     $scope.addListing = function() {
-	  /**TODO 
+        //This code from bootcamp 2
+	  $scope.listings.push({
+          "code": $scope.newListing.code,
+          "name": $scope.newListing.name,
+          "coordinates": {
+              "latitude": $scope.newListing.latitude,
+              "longitude": $scope.newListing.longitude
+          },
+          "address": $scope.newListing.address
+      });
+        /**TODO
 	  *Save the article using the Listings factory. If the object is successfully 
 	  saved redirect back to the list page. Otherwise, display the error
 	 */
