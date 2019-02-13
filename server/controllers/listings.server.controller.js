@@ -73,10 +73,12 @@ exports.update = function(req, res) {
 exports.delete = function(req, res) {
     var listing = req.listing;
     // try .remove if it doesnt work, but w/ 1 argument
-    listing.remove(function (err) {
-        res.json(listing);
-        if (err) throw err;
 
+    listing.remove(function (err) {
+        /*res.json(listing);
+        if (err) throw err;*/
+        if (err) {res.status(400).send(err);}
+        else { res.send(listing);}
     });
 
 
@@ -97,7 +99,7 @@ exports.list = function(req, res) {
     });
 */
 
-    Listing.find().sort({code: 1}).exec(function (err, listing) {
+    Listing.find().sort("code"/*{code: 1}*/).exec(function (err, listing) {
         if (err) {
             res.status(400).send(err);
         } else {

@@ -12,7 +12,9 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
     $scope.addListing = function() {
         //This code from bootcamp 2
         Listings.create($scope.newListing).then(function(response) {
-            $scope.listings.push(response.data);
+            $scope.listings.push(
+                //response.data
+                $scope.newListing);
         }, function (error) {
             console.log('Unable to retrieve listings:', error);
         });
@@ -35,11 +37,42 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
     };
 
     $scope.deleteListing = function(id) {
-        Listings.delete(id).then(function(response) {
+       /* Listings.delete(id).then(function(response) {
             $scope.listings = response.data;
         }, function (error) {
             console.log('Unable to retrieve listings:', error);
-        });
+        });*/
+        /*Listings.delete($scope.listings[id]).then(function(response){
+            console.log("in delete");
+           for(var i = 0; i< $scope.listings.length; i++){
+               console.log("in for");
+               if(response.data.code == $scope.listings[i].code) {
+                   console.log("in if");
+                   $scope.listings.splice(i, 1);
+               }
+           }
+        }, function(error) {
+            console.log('ERROR', error);
+        });*/
+        console.log(id);
+       Listings.delete(id).then(function(res, id){
+           console.log("in delete");
+           /*for(var i = 0; i< $scope.listings.length; i++){
+               console.log("in for");
+               if(res.data.code == $scope.listings[i].code) {
+                   console.log("in if");
+                   $scope.listings.splice(i, 1);
+               }
+           }*/
+           if (res.status == 200) {
+               $scope.listings.splice($scope.listings.indexOf(id), 1);
+           }
+           console.log("works");
+
+           //res.json(listings);
+       }, function(error) {
+           console.log('ERROR', error);
+       });
         /*
         var index = $scope.listings.indexOf(id);
         $scope.listings.splice(index, 1);*/

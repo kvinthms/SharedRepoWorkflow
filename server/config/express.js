@@ -19,8 +19,9 @@ module.exports.init = function() {
     //body parsing middleware
     app.use(bodyParser.json());
 
-    let _dirname = 'bootcampassignment-4-expressjs-kvinthms';
-        app.use('/', express.static(_dirname + '/../../client'));
+    app.use("/", express.static('client'));
+   // let _dirname = 'bootcampassignment-4-expressjs-kvinthms';
+       // app.use('/', express.static(_dirname + '/../../client'));
     //app.use(express.static('/'));
     //or
     //app.use(express.static(path));
@@ -31,7 +32,7 @@ module.exports.init = function() {
     /**TODO
      Use the listings router for requests to the api */
 
-    app.all('*/', function (req, res) {
+    app.use('*/', function (req, res) {
         res.sendFile(path.resolve('client/index.html'));
     });
     /**TODO
