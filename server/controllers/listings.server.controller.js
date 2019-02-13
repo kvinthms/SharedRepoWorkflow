@@ -42,18 +42,27 @@ exports.update = function(req, res) {
 
     //Unknown if real function must look at mongoose methods for confirm
     //Unknown if method actually does what its supposed to
+    //listing.name = req.body.name etc. .code .address
+    listing.name = req.body.name;
+    listing.code = req.body.code;
+    listing.address = req.body.address;
+    listing.save(function (err) {
+        res.json(req.listing);
+        if (err) throw err;
+    });
 
+    /*
     User.update({listing}, function(err) {
 
         listing.body = req.body;
-        res.json(listing);
-
         if(err) {
             console.log(err);
             res.status(400).send(err);
+        } else {
+            res.json(listing)
         }
 
-    });
+    });*/
 
     /** TODO **/
     /* Replace the article's properties with the new properties found in req.body */
@@ -63,6 +72,12 @@ exports.update = function(req, res) {
 /* Delete a listing */
 exports.delete = function(req, res) {
     var listing = req.listing;
+    // try .remove if it doesnt work, but w/ 1 argument
+    listing.remove(function (err) {
+        res.json(listing);
+        if (err) throw err;
+
+    });
 
 
 
@@ -72,6 +87,24 @@ exports.delete = function(req, res) {
 
 /* Retreive all the directory listings, sorted alphabetically by listing code */
 exports.list = function(req, res) {
+/*
+    Listing.find().sort({code: 1}).then(listings => {
+        res.json(listings);
+        if (err) throw err;
+    }).catch(err => {
+        res.status(400).send(err);
+        console.log('error' + err);
+    });
+*/
+
+    Listing.find().sort({code: 1}).exec(function (err, listing) {
+        if (err) {
+            res.status(400).send(err);
+        } else {
+            res.send(listing);
+        }
+    });
+
     /** TODO **/
     /* Your code here */
 };

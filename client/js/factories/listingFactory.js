@@ -9,6 +9,7 @@ angular.module('listings', []).factory('Listings', function($http) {
     }, 
 
     delete: function(id) {
+        return $http.delete('http://localhost:8080/api/listings/' + id);
 	   /**TODO
         return result of HTTP delete method
        */
