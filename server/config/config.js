@@ -6,6 +6,6 @@ module.exports = {
     uri: 'mongodb://bootcamp:acc3ss@ds051720.mlab.com:51720/bootcamp3', //place the URI of your mongo database here.
   }, 
 
-  port: a big number and a small number
+  port: This is a modification
 };
 //Brandon Clark
