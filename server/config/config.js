@@ -6,6 +6,6 @@ module.exports = {
     uri: 'mongodb://abowles:cen3031@ds245082.mlab.com:45082/listings', //place the URI of your mongo database here.
   }, 
   
-  port: This is a modification
+  port: 8000
 };
 //Alyssa Bowles
